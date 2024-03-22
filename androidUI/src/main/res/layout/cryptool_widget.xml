@@ -1,0 +1,220 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.CryptoolTest.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/widget_shape"
+    android:padding="0dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topPanel_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/app_widget_header_background"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="@dimen/widget_default_padding"
+        android:paddingHorizontal="@dimen/widget_input_margin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/cryptool_logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/widget_white"
+            android:layout_marginStart="@dimen/widget_heading_margin_start"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="@dimen/text_size_medium"
+            android:text="@string/cryptool" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="@dimen/widget_input_margin"
+        android:layout_marginTop="@dimen/widget_item_spacing_default">
+
+        <LinearLayout
+            android:id="@+id/errorBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/widget_background_incorrect"
+            android:orientation="horizontal"
+            android:visibility="gone"/>
+
+
+        <LinearLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/app_widget_text_view"
+            android:orientation="horizontal"
+            android:padding="@dimen/widget_default_padding">
+
+            <ImageView
+                android:id="@+id/passwordIcon"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/password_text_icon" />
+
+            <TextView
+                android:id="@+id/passwordInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/widget_default_margin"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/colorPrimaryText"
+                tools:text="Password" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/widget_error"
+        android:layout_marginStart="@dimen/widget_default_margin"
+        android:layout_marginTop="@dimen/widget_error_margin_top"
+        android:layout_marginBottom="@dimen/widget_error_margin_bottom"
+        android:fontFamily="@font/montserrat_regular"
+        android:textSize="@dimen/text_size_error"
+        android:visibility="gone"
+        android:text="@string/incorrect_password" />
+
+    <LinearLayout
+        android:id="@+id/messageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="@dimen/widget_input_margin"
+        android:layout_marginTop="@dimen/widget_item_spacing_small"
+        android:background="@drawable/app_widget_text_view"
+        android:orientation="horizontal"
+        android:padding="@dimen/widget_default_padding">
+
+        <ImageView
+            android:id="@+id/textIcon"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/icon"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/widget_default_margin"
+            android:src="@drawable/message_icon" />
+
+        <TextView
+            android:id="@+id/messageInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/text_size_small"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimaryText"
+            tools:text="Message" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/widget_input_margin"
+        android:layout_marginTop="@dimen/widget_item_spacing_large"
+        android:layout_marginBottom="@dimen/widget_medium_padding"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:id="@+id/actionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/action_button_background"
+            android:padding="@dimen/widget_default_padding">
+
+            <ImageView
+                android:id="@+id/imageForButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/encrypt_image" />
+
+            <TextView
+                android:id="@+id/encryptAndDecrypt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/widget_white"
+                android:layout_marginStart="@dimen/widget_action_margin"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/encrypt_text" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/decryptButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/action_button_background"
+            android:padding="@dimen/widget_default_padding">
+
+            <ImageView
+                android:id="@+id/imageForDecryptButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/decrypt_button" />
+
+            <TextView
+                android:id="@+id/decryptText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/widget_white"
+                android:layout_marginStart="@dimen/widget_action_margin"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/decrypt" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/widget_default_margin"
+            android:background="@drawable/clear_button"
+            android:text="@string/clear">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/widget_large_margin"
+                android:layout_marginVertical="@dimen/widget_default_margin"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="@dimen/text_size_small"
+                android:text="@string/clear" />
+
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

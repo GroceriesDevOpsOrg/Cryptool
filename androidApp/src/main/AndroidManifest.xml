@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="io.github.nfdz.cryptool">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission
         android:name="android.permission.SYSTEM_ALERT_WINDOW"
         android:required="false" />
@@ -70,5 +74,54 @@
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
+
+
+<!--        <receiver-->
+<!--            android:name=".widget.CryptoolWidget"-->
+<!--            android:exported="false">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+<!--            </intent-filter>-->
+
+<!--            <meta-data-->
+<!--                android:name="android.appwidget.provider"-->
+<!--                android:resource="@xml/cryptool_widget_info" />-->
+<!--        </receiver>-->
+
+<!--        <activity-->
+<!--            android:name=".widget.ErrorActivity"-->
+<!--            android:theme="@style/Theme.TransparentActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".widget.ClearActivity"-->
+<!--            android:theme="@style/Theme.TransparentActivity"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".widget.InputMessageActivity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.TransparentActivity"-->
+<!--            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />-->
+<!--        <activity-->
+<!--            android:name=".widget.InputPasswordActivity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.TransparentActivity"-->
+<!--            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />-->
+
+<!--        <receiver-->
+<!--            android:name=".widget.PasswordClickReceiver"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.widget.receiver.password" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+<!--        <receiver-->
+<!--            android:name=".widget.MessageClickReceiver"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.widget.receiver.message" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
     </application>
 </manifest> 

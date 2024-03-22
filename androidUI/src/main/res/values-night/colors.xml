@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryText">#FFFFFF</color>
+    <color name="colorPrimaryTextHint">#BDB5B5</color>
+</resources>

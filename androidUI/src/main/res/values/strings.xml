@@ -228,4 +228,26 @@
     <string name="cb_copy_empty_snackbar">There is no text to copy</string>
     <string name="cb_clear_success_snackbar">Clipboard cleared successfully</string>
 
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+
+    <string name="cryptool">Cryptool</string>
+    <string name="password_text">Password</string>
+    <string name="icon">Icon</string>
+    <string name="widget_hint">M@ngo123</string>
+    <string name="clear">Clear</string>
+    <string name="test_text">This is a test text. This is an app widget description. This is an app widget description. This is an app widget description</string>
+    <string name="test_message">Message</string>
+
+    <string name="decrypt_text">DECRYPT</string>
+    <string name="encrypt_text">ENCRYPT</string>
+    <string name="copy_text">Copy</string>
+    <string name="incorrect_password">Incorrect password! please try again!</string>
+    <string name="widget_password_hint">Password</string>
+    <string name="widget_message_hint">Message</string>
+
+    <string name="pop_password">Input your Password</string>
+    <string name="pop_message">Input a Message</string>
+
 </resources>
