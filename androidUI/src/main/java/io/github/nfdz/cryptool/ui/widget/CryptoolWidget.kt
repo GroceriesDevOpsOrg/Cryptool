@@ -62,16 +62,19 @@ class CryptoolWidget : AppWidgetProvider() {
 
         views.setTextViewText(R.id.passwordInput, updatedValueP)
         views.setTextViewText(R.id.messageInput, updatedValueM)
-//        Log.d(TAG, "onUpdateTextValue: $message")
 
         if (updatedValueM.isCipherText()) {
             views.setViewVisibility(R.id.decryptButton, View.VISIBLE)
             views.setViewVisibility(R.id.actionButton, View.GONE)
             views.setViewVisibility(R.id.copyButton, View.GONE)
+            views.setViewVisibility(R.id.errorBackground, View.GONE)
+            views.setViewVisibility(R.id.errorText, View.GONE)
         } else {
             views.setViewVisibility(R.id.decryptButton, View.GONE)
             views.setViewVisibility(R.id.actionButton, View.VISIBLE)
             views.setViewVisibility(R.id.copyButton, View.GONE)
+            views.setViewVisibility(R.id.errorBackground, View.GONE)
+            views.setViewVisibility(R.id.errorText, View.GONE)
         }
 
         appWidgetIds.forEach {
@@ -167,12 +170,10 @@ class CryptoolWidget : AppWidgetProvider() {
                         CryptoolWidget::class.java
                     )
                 )
-                val sharedPreferences2 =
-                    context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 val updatedValueP =
-                    sharedPreferences2.getString("broadcastPasswordValue", null)
+                    sharedPreferences.getString("broadcastPasswordValue", null)
                 val updatedValueM =
-                    sharedPreferences2.getString("broadcastMessageValue", null)
+                    sharedPreferences.getString("broadcastMessageValue", null)
 
 
                 CoroutineScope(Dispatchers.IO).launch {
@@ -182,7 +183,7 @@ class CryptoolWidget : AppWidgetProvider() {
 
                             Log.d(TAG, "onReceiveEncrypt: $encryptMessage")
 
-                            sharedPreferences2.edit()
+                            sharedPreferences.edit()
                                 .putString("broadcastMessageValue", encryptMessage)
                                 .apply()
 
@@ -215,12 +216,10 @@ class CryptoolWidget : AppWidgetProvider() {
                         CryptoolWidget::class.java
                     )
                 )
-                val sharedPreferences2 =
-                    context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 val updatedValueP =
-                    sharedPreferences2.getString("broadcastPasswordValue", null) ?: ""
+                    sharedPreferences.getString("broadcastPasswordValue", null) ?: ""
                 val updatedValueM =
-                    sharedPreferences2.getString("broadcastMessageValue", null) ?: ""
+                    sharedPreferences.getString("broadcastMessageValue", null) ?: ""
 
                 CoroutineScope(Dispatchers.IO).launch {
                     var errorState = false
@@ -228,7 +227,7 @@ class CryptoolWidget : AppWidgetProvider() {
                     try {
                         val decryptMessage = createDecryptedText(updatedValueP, updatedValueM)
                         Log.d(TAG, "onReceiveDecrypt: $decryptMessage")
-                        sharedPreferences2.edit().putString("broadcastMessageValue", decryptMessage)
+                        sharedPreferences.edit().putString("broadcastMessageValue", decryptMessage)
                             .apply()
 
                         withContext(Dispatchers.Main) {
@@ -270,10 +269,8 @@ class CryptoolWidget : AppWidgetProvider() {
                         CryptoolWidget::class.java
                     )
                 )
-                val sharedPreferences2 =
-                    context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 val updatedValueM =
-                    sharedPreferences2.getString("broadcastMessageValue", "-Message- ") ?: ""
+                    sharedPreferences.getString("broadcastMessageValue", null) ?: ""
 
                 ClipboardWidget.set(context, updatedValueM) {
                     Toast.makeText(context, it, Toast.LENGTH_SHORT).show()

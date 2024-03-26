@@ -29,7 +29,7 @@ class InputPasswordActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val password = editText.text.toString()
-            if (password.isNotEmpty() || password.isNotBlank()){
+            if (password.isNotEmpty() && password.isNotBlank()){
                 val sharedPreferences = getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 sharedPreferences.edit().putString("broadcastPasswordValue", editText.text.toString()).apply()
 

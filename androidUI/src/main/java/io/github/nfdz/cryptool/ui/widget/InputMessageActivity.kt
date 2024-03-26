@@ -29,7 +29,7 @@ class InputMessageActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val messageText = editText.text.toString()
-            if (messageText.isNotEmpty()) {
+            if (messageText.isNotEmpty() && messageText.isNotBlank()) {
                 val sharedPreferences = getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 sharedPreferences.edit()
                     .putString("broadcastMessageValue", messageText).apply()
