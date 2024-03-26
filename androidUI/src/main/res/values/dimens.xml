@@ -5,50 +5,84 @@
 Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
-<!--    <dimen name="widget_margin">0dp</dimen>-->
-
-<!--    <dimen name="widget_small_margin">8dp</dimen>-->
-<!--    <dimen name="widget_default_margin">16dp</dimen>-->
-<!--    <dimen name="widget_default_padding">16dp</dimen>-->
-<!--    <dimen name="widget_large_margin">33dp</dimen>-->
-<!--    <dimen name="widget_medium_padding">30dp</dimen>-->
-<!--    <dimen name="widget_corner_radius">16dp</dimen>-->
-<!--    <dimen name="widget_medium_margin">24dp</dimen>-->
-
-<!--    <dimen name="widget_card_radius">30dp</dimen>-->
-
     <dimen name="widget_margin">0dp</dimen>
 
-    <dimen name="widget_heading_margin_start">10dp</dimen>
+    <dimen name="widget_heading_margin_start">6.6dp</dimen>
     <dimen name="widget_main_padding">26dp</dimen>
+
     <dimen name="widget_item_spacing_default">15dp</dimen>
-    <dimen name="widget_item_spacing_small">10dp</dimen>
+    <dimen name="widget_item_spacing_small">9.9dp</dimen>
     <dimen name="widget_item_spacing_large">20dp</dimen>
     <dimen name="widget_item_radius">10dp</dimen>
-    <dimen name="widget_default_padding">15dp</dimen>
+    <dimen name="widget_item_radius_small">5dp</dimen>
+
+    <dimen name="widget_item_encrypt">9.24dp</dimen>
+    <dimen name="widget_item_clear">21.78dp</dimen>
+
+    <dimen name="widget_default_padding">10.56dp</dimen>
     <dimen name="widget_default_margin">15dp</dimen>
-    <dimen name="widget_action_margin">10dp</dimen>
-    <dimen name="widget_clear_margin">20dp</dimen>
-    <dimen name="widget_input_margin">26dp</dimen>
-    <dimen name="widget_margin_password">14dp</dimen>
     <dimen name="widget_large_margin">33dp</dimen>
 
+    <dimen name="widget_action_margin">10dp</dimen>
+    <dimen name="widget_clear_margin">20dp</dimen>
+    <dimen name="widget_input_margin">16.8dp</dimen>
     <dimen name="widget_input_margin_top">12dp</dimen>
+    <dimen name="widget_margin_password">14dp</dimen>
 
-    <dimen name="widget_medium_padding">30dp</dimen>
-    <dimen name="widget_corner_radius">16dp</dimen>
+    <dimen name="widget_icon_size">16dp</dimen>
+    <dimen name="widget_icon_text_margin">6.6dp</dimen>
+
+    <dimen name="widget_margin_bottom">19.03dp</dimen>
     <dimen name="widget_medium_margin">24dp</dimen>
-    <dimen name="widget_heading_icon_start">12dp</dimen>
+    <dimen name="widget_medium_padding">30dp</dimen>
 
+    <dimen name="widget_corner_radius">16dp</dimen>
+    <dimen name="widget_card_radius">20dp</dimen>
+
+    <dimen name="widget_heading_icon_start">12dp</dimen>
 
     <dimen name="widget_error_margin_top">5dp</dimen>
     <dimen name="widget_error_margin_bottom">8dp</dimen>
     <dimen name="widget_error_padding">8dp</dimen>
 
-    <dimen name="widget_card_radius">30dp</dimen>
-    <dimen name="text_size_medium">24sp</dimen>
-    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_error">10sp</dimen>
 
 
+    <!--
+    <dimen name="widget_margin">0dp</dimen>
+
+    <dimen name="widget_heading_margin_start">7.5dp</dimen>
+    <dimen name="widget_main_padding">19.5dp</dimen>
+    <dimen name="widget_item_spacing_default">11.25dp</dimen>
+    <dimen name="widget_item_spacing_small">7.5dp</dimen>
+    <dimen name="widget_item_spacing_large">15dp</dimen>
+    <dimen name="widget_item_radius">7.5dp</dimen>
+    <dimen name="widget_default_padding">11.25dp</dimen>
+    <dimen name="widget_default_margin">11.25dp</dimen>
+    <dimen name="widget_margin_password">10.25dp</dimen>
+    <dimen name="widget_large_margin">24.75dp</dimen>
+
+
+
+
+    <dimen name="widget_input_margin_top">9dp</dimen>
+
+
+    <dimen name="widget_medium_padding">22.5dp</dimen>
+    <dimen name="widget_corner_radius">12dp</dimen>
+    <dimen name="widget_medium_margin">18dp</dimen>
+    <dimen name="widget_heading_icon_start">9dp</dimen>
+
+
+    <dimen name="widget_error_margin_top">3dp</dimen>
+    <dimen name="widget_error_margin_bottom">6dp</dimen>
+    <dimen name="widget_error_padding">6dp</dimen>
+
+    <dimen name="widget_card_radius">22.5dp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_error">8.25sp</dimen>
+    -->
 </resources>

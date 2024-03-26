@@ -8,22 +8,21 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.RemoteViews
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import io.github.nfdz.cryptool.shared.encryption.entity.AlgorithmVersion
 import io.github.nfdz.cryptool.ui.R
 import io.github.nfdz.cryptool.ui.widget.WidgetConst.CLEAR
+import io.github.nfdz.cryptool.ui.widget.WidgetConst.COPY
 import io.github.nfdz.cryptool.ui.widget.WidgetConst.DECRYPT
 import io.github.nfdz.cryptool.ui.widget.WidgetConst.ENCRYPT
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.sqrt
 
 /**
  * Implementation of App Widget functionality.
@@ -57,11 +56,9 @@ class CryptoolWidget : AppWidgetProvider() {
         val sharedPreferences =
             context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
         val updatedValueP =
-            sharedPreferences?.getString("broadcastPasswordValue", "Password") ?: "Password"
+            sharedPreferences?.getString("broadcastPasswordValue", null) ?: "Password"
         val updatedValueM =
-            sharedPreferences?.getString("broadcastMessageValue", "Message") ?: "Message"
-
-        //Nfa7CUjRV6CapE8i5sjAf39f53Y.OckwJeN21jXZHVu0yveWqQ.128.phsbfCV2pJbHZ5gQIPb_oydmI8H226cuez4WgvAHlMghPeBkc6aU7eJXP5h4xdtuZGN0UjsQ
+            sharedPreferences?.getString("broadcastMessageValue", null) ?: "Message "
 
         views.setTextViewText(R.id.passwordInput, updatedValueP)
         views.setTextViewText(R.id.messageInput, updatedValueM)
@@ -70,9 +67,11 @@ class CryptoolWidget : AppWidgetProvider() {
         if (updatedValueM.isCipherText()) {
             views.setViewVisibility(R.id.decryptButton, View.VISIBLE)
             views.setViewVisibility(R.id.actionButton, View.GONE)
+            views.setViewVisibility(R.id.copyButton, View.GONE)
         } else {
             views.setViewVisibility(R.id.decryptButton, View.GONE)
             views.setViewVisibility(R.id.actionButton, View.VISIBLE)
+            views.setViewVisibility(R.id.copyButton, View.GONE)
         }
 
         appWidgetIds.forEach {
@@ -101,6 +100,11 @@ class CryptoolWidget : AppWidgetProvider() {
                 R.id.decryptButton,
                 getPendingSelfIntent(context, action = DECRYPT)
             )
+            views.setOnClickPendingIntent(
+                R.id.copyButton,
+                getPendingSelfIntent(context, action = COPY)
+            )
+
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
     }
@@ -146,6 +150,8 @@ class CryptoolWidget : AppWidgetProvider() {
                 remoteViews.setViewVisibility(R.id.errorBackground, View.GONE)
                 remoteViews.setViewVisibility(R.id.errorText, View.GONE)
 
+                remoteViews.setViewVisibility(R.id.copyButton, View.GONE)
+
                 editor.remove("broadcastPasswordValue").apply()
                 editor.remove("broadcastMessageValue").apply()
                 for (appWidgetId in appWidgetIds) {
@@ -164,26 +170,37 @@ class CryptoolWidget : AppWidgetProvider() {
                 val sharedPreferences2 =
                     context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 val updatedValueP =
-                    sharedPreferences2.getString("broadcastPasswordValue", "-Password-") ?: ""
+                    sharedPreferences2.getString("broadcastPasswordValue", null)
                 val updatedValueM =
-                    sharedPreferences2.getString("broadcastMessageValue", "-Message-") ?: ""
+                    sharedPreferences2.getString("broadcastMessageValue", null)
+
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    val encryptMessage = createEncryptedText(updatedValueP, updatedValueM)
-                    Log.d(TAG, "onReceiveEncrypt: $encryptMessage")
+                    updatedValueP?.let { password ->
+                        updatedValueM?.let { message ->
+                            val encryptMessage = createEncryptedText(password, message)
 
-                    sharedPreferences2.edit().putString("broadcastMessageValue", encryptMessage)
-                        .apply()
+                            Log.d(TAG, "onReceiveEncrypt: $encryptMessage")
 
-                    withContext(Dispatchers.Main) {
-                        remoteViews.setTextViewText(R.id.passwordInput, updatedValueP)
-                        remoteViews.setTextViewText(R.id.messageInput, encryptMessage.plus(" "))
+                            sharedPreferences2.edit()
+                                .putString("broadcastMessageValue", encryptMessage)
+                                .apply()
 
-                        remoteViews.setViewVisibility(R.id.actionButton, View.GONE)
-                        remoteViews.setViewVisibility(R.id.decryptButton, View.VISIBLE)
+                            withContext(Dispatchers.Main) {
+                                remoteViews.setTextViewText(R.id.passwordInput, updatedValueP)
+                                remoteViews.setTextViewText(
+                                    R.id.messageInput,
+                                    encryptMessage.plus(" ")
+                                )
 
-                        for (appWidgetId in appWidgetIds) {
-                            appWidgetManager.updateAppWidget(componentName, remoteViews)
+                                remoteViews.setViewVisibility(R.id.actionButton, View.GONE)
+                                remoteViews.setViewVisibility(R.id.copyButton, View.VISIBLE)
+
+
+                                for (appWidgetId in appWidgetIds) {
+                                    appWidgetManager.updateAppWidget(componentName, remoteViews)
+                                }
+                            }
                         }
                     }
                 }
@@ -201,9 +218,9 @@ class CryptoolWidget : AppWidgetProvider() {
                 val sharedPreferences2 =
                     context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
                 val updatedValueP =
-                    sharedPreferences2.getString("broadcastPasswordValue", "-Password-") ?: ""
+                    sharedPreferences2.getString("broadcastPasswordValue", null) ?: ""
                 val updatedValueM =
-                    sharedPreferences2.getString("broadcastMessageValue", "-Message-") ?: ""
+                    sharedPreferences2.getString("broadcastMessageValue", null) ?: ""
 
                 CoroutineScope(Dispatchers.IO).launch {
                     var errorState = false
@@ -218,8 +235,8 @@ class CryptoolWidget : AppWidgetProvider() {
                             remoteViews.setTextViewText(R.id.passwordInput, updatedValueP)
                             remoteViews.setTextViewText(R.id.messageInput, decryptMessage)
 
-                            remoteViews.setViewVisibility(R.id.actionButton, View.VISIBLE)
                             remoteViews.setViewVisibility(R.id.decryptButton, View.GONE)
+                            remoteViews.setViewVisibility(R.id.copyButton, View.VISIBLE)
 
                             for (appWidgetId in appWidgetIds) {
                                 appWidgetManager.updateAppWidget(componentName, remoteViews)
@@ -245,6 +262,26 @@ class CryptoolWidget : AppWidgetProvider() {
                 }
             }
 
+            COPY -> {
+                val appWidgetManager = AppWidgetManager.getInstance(context)
+                val appWidgetIds = appWidgetManager.getAppWidgetIds(
+                    ComponentName(
+                        context,
+                        CryptoolWidget::class.java
+                    )
+                )
+                val sharedPreferences2 =
+                    context.getSharedPreferences("WidgetPrefs", Context.MODE_PRIVATE)
+                val updatedValueM =
+                    sharedPreferences2.getString("broadcastMessageValue", "-Message- ") ?: ""
+
+                ClipboardWidget.set(context, updatedValueM) {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+                for (appWidgetId in appWidgetIds) {
+                    appWidgetManager.updateAppWidget(componentName, remoteViews)
+                }
+            }
         }
 
         super.onReceive(context, intent)
@@ -271,36 +308,7 @@ class CryptoolWidget : AppWidgetProvider() {
 
         // You can add more specific checks based on the encryption algorithms or formats you expect.
 
-        return this.matches("[A-Za-z0-9+/_.]+[=]{0,2}\$".toRegex())
-    }
-
-
-    private fun isNotCipherText(text: String): Boolean {
-        val charFrequency = mutableMapOf<Char, Int>()
-
-        // Count the frequency of each character
-        for (char in text) {
-            charFrequency[char] = charFrequency.getOrDefault(char, 0) + 1
-        }
-
-        // Calculate the total number of characters (excluding spaces)
-        val totalChars = text.filter { it != ' ' }.length
-
-        // Calculate the frequency percentage for each character
-        val frequencyPercentage = charFrequency.mapValues { (_, count) ->
-            (count.toDouble() / totalChars) * 100
-        }
-
-        // Calculate the mean and standard deviation of frequency percentages
-        val mean = frequencyPercentage.values.average()
-        val standardDeviation =
-            sqrt(frequencyPercentage.values.map { (it - mean) * (it - mean) }.average())
-
-        // If the standard deviation is low, it's likely not ciphertext
-        // Adjust this threshold based on your specific needs
-        val threshold = 5.0
-
-        return standardDeviation < threshold
+        return this.matches("[A-Za-z0-9+/_.-]+[=]{0,2}\$".toRegex())
     }
 
     private fun getPendingSelfIntent(

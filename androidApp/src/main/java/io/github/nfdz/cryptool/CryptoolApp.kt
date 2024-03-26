@@ -1,6 +1,8 @@
 package io.github.nfdz.cryptool
 
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.github.nfdz.cryptool.platform.biometric.BiometricAndroid
@@ -53,6 +55,7 @@ import io.github.nfdz.cryptool.ui.platform.ApplicationManager
 import io.github.nfdz.cryptool.ui.platform.ChangelogProviderAndroid
 import io.github.nfdz.cryptool.ui.platform.ClipboardAndroid
 import io.github.nfdz.cryptool.ui.platform.LegacyPinCodeManager
+import io.github.nfdz.cryptool.ui.widget.CryptoolWidget
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
