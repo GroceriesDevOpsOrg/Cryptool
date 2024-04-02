@@ -1,6 +1,5 @@
 package io.github.nfdz.cryptool.ui.widget
 
-import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -112,7 +111,6 @@ class CryptoolWidget : AppWidgetProvider() {
         }
     }
 
-    @SuppressLint("CommitPrefEdits")
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val action = intent?.action
